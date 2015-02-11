@@ -32,7 +32,6 @@ version(USE_PGSQL) {
     import std.stdio;
     import std.string;
     import std.variant;
-    import std.array;
     import core.sync.mutex;
     
     import ddbc.common;
@@ -395,7 +394,7 @@ version(USE_PGSQL) {
                                     v[col] = byteaToUbytes(s);
                                     break;
                                 case TIMESTAMPOID:
-                                    v[col] = DateTime.fromISOExtString( s.translate( [ ' ': 'T' ] ).split( '.' ).front() );
+                                    v[col] = DateTime.fromISOExtString( s.translate( [ ' ': 'T' ] ) );
                                     break;
                                 default:
                                     throw new SQLException("Unsupported column type " ~ to!string(t));
